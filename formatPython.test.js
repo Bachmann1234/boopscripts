@@ -1,4 +1,4 @@
-const formatDict = require("./script");
+const formatDict = require("./formatPython");
 
 test("formats empty dict", () => {
   expect(formatDict("{}")).toBe("{\n    \n}");
@@ -6,6 +6,6 @@ test("formats empty dict", () => {
 
 test("formats basic key value pairs", () => {
   expect(formatDict("{'dog': 3, u'cat': 4}")).toBe(
-    "{\n    'dog': 3,\n     u'cat': 4\n}"
+    "{\n    'dog': 3,\n    u'cat': 4\n}"
   );
 });

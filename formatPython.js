@@ -22,7 +22,7 @@ function formatDict(text) {
   const indentAmount = 4;
   let indentLevel = 0;
   let result = [];
-  text.replace(/\s/g, "");
+  text = text.replace(/\s+/g, "");
   for (let i = 0; i < text.length; i++) {
     let char = text.charAt(i);
     switch (char) {
@@ -36,6 +36,9 @@ function formatDict(text) {
         break;
       case ",":
         result.push(char, ...newLineWithIndent(indentLevel, indentAmount));
+        break;
+      case ":":
+        result.push(char, " ");
         break;
       default:
         result.push(char);
