@@ -22,23 +22,54 @@ function formatDict(text) {
   const indentAmount = 4;
   let indentLevel = 0;
   let result = [];
+  let escape = null;
   text = text.replace(/\s+/g, "");
   for (let i = 0; i < text.length; i++) {
     let char = text.charAt(i);
     switch (char) {
+      case "'":
+      case '"':
+        result.push(char)
+        if (text.charAt(-i) === '\\') {
+          break;
+        }
+        if (escape === null) {
+          escape = char;
+        } else if (escape === char) {
+          escape = null;
+        }
+        break;
       case "{":
-        indentLevel += 1;
-        result.push(char, ...newLineWithIndent(indentLevel, indentAmount));
+      case "[":
+        if (escape) {
+          result.push(char);
+        } else {
+          indentLevel += 1;
+          result.push(char, ...newLineWithIndent(indentLevel, indentAmount));
+        }
         break;
       case "}":
-        indentLevel -= 1;
-        result.push(...newLineWithIndent(indentLevel, indentAmount), char);
+      case "]":
+        if (escape) {
+          result.push(char);
+        } else {
+          indentLevel -= 1;
+          result.push(...newLineWithIndent(indentLevel, indentAmount), char);
+        }
         break;
       case ",":
-        result.push(char, ...newLineWithIndent(indentLevel, indentAmount));
+        if (escape) {
+          result.push(char);
+        } else {
+          result.push(char, ...newLineWithIndent(indentLevel, indentAmount));
+        }
         break;
       case ":":
-        result.push(char, " ");
+        if (escape) {
+          result.push(char);
+        } else {
+          result.push(char, " ");
+        }
         break;
       default:
         result.push(char);
