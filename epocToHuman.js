@@ -10,18 +10,18 @@
  **/
 
 function epochSecondsToHuman(text) {
-    const date = new Date(parseInt(text, 10) * 1000);
-    const utc = new Date(date.getTime() + (date.getTimezoneOffset() * 60000));
-    return `local: ${date.toLocaleString()}
+  const date = new Date(parseInt(text, 10) * 1000);
+  const utc = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+  return `local: ${date.toLocaleString()}
 utc: ${utc.toLocaleString()}`;
 }
 
 function main(state) {
-    try {
-        state.text = epochSecondsToHuman(state.text);
-    } catch (error) {
-        state.postError("Failed to convert");
-    }
+  try {
+    state.text = epochSecondsToHuman(state.text);
+  } catch (error) {
+    state.postError("Failed to convert");
+  }
 }
 
 module.exports = epochSecondsToHuman;

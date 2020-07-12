@@ -29,8 +29,8 @@ function formatDict(text) {
     switch (char) {
       case "'":
       case '"':
-        result.push(char)
-        if (text.charAt(-i) === '\\') {
+        result.push(char);
+        if (text.charAt(-i) === "\\") {
           break;
         }
         if (escape === null) {
