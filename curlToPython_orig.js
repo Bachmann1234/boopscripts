@@ -14,6 +14,6 @@ global.main = function(state) {
     try {
         state.text = curlconverter.toPython(state.text);
     } catch (error) {
-        state.postError("Failed to format dict");
+        state.postError("Failed to convert Curl Command");
     }
 }
