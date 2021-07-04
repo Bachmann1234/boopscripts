@@ -10,7 +10,7 @@
  **/
 
 function formatInQuery(text) {
-  return text.split(/\s+/).join()
+  return text.split(/\s+/).join();
 }
 
 function main(state) {
