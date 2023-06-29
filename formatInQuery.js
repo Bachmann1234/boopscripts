@@ -10,7 +10,11 @@
  **/
 
 function formatInQuery(text) {
-  return text.split(/\s+/).map(s => `'${s}'`).join();
+  return text
+    .split(/\s+/)
+    .filter(s => s)
+    .map(s => `'${s}'`)
+    .join();
 }
 
 function main(state) {
